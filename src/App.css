@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.bg-light{
+  background-image: url('./4F834147-E49A-48DA-8A18-E1A795F7F49B_1_105_c.jpeg');
+  background-size: cover;
+  color: #fff;
+}
