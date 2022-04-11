@@ -19,9 +19,9 @@ function App() {
         <Container>
         <Navbar.Brand >Navbar</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link ><Link to="/">Home</Link></Nav.Link>
-          <Nav.Link ><Link to="/Detail">Detail</Link></Nav.Link>
-          <Nav.Link >Pricing</Nav.Link>
+          <Nav.Link as={Link}><Link to="/">Home</Link></Nav.Link>
+          <Nav.Link as={Link}><Link to="/Detail">Detail</Link></Nav.Link>
+          <Nav.Link as={Link}>Pricing</Nav.Link>
         </Nav>
         </Container>
       </Navbar>
