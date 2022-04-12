@@ -9,7 +9,6 @@ import { Link, Route, Switch } from 'react-router-dom'
 import axios from 'axios';
 
 
-
 function App() {
 
   let [shoes, setShoes] = useState(Data);

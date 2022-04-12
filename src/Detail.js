@@ -1,4 +1,5 @@
 import React,{ useState,useEffect} from 'react';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useHistory, useParams} from 'react-router-dom';
 import axios from 'axios'
 
@@ -8,6 +9,8 @@ import axios from 'axios'
 function Detail({shoes, setShoes}){
 
     const [ alert, setAlert ] = useState(true);//ui 스위치
+    let [tab, setTab] = useState(0);
+    let [ switchCss , setSwitchCss ] = useState(false);
 
     useEffect(()=>{
 
@@ -46,7 +49,7 @@ function Detail({shoes, setShoes}){
           
       <div className="row">
         <div className="col-md-6">
-          <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
+          <img src={"https://codingapple1.github.io/shop/shoes" + findId.id + ".jpg"} width="100%" />
         </div>
         <div className="col-md-6 mt-4">
           <h4 className="pt-5">{findId.title}</h4>
@@ -56,7 +59,46 @@ function Detail({shoes, setShoes}){
           <button className="btn back-button" onClick={()=>{history.goBack();}}>뒤로가기</button> 
         </div>
       </div>
+
+      <Nav className="mt-5" variant="tabs" defaultActiveKey="Detail">
+        <Nav.Item>
+            <Nav.Link href={"/Detail/" + findId.id } onClick={()=>{setTab(0)}}>0</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+            <Nav.Link eventKey="link-1" onClick={()=>{setTab(1)}}>1</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+            <Nav.Link eventKey="link-2" onClick={()=>{setTab(2)}}>
+            2
+            </Nav.Link>
+        </Nav.Item>
+      </Nav>
+          
+          <TabContent tab={tab} setSwitchCss={setSwitchCss}/>
+          
+
     </div>
     )
   }
+
+  function TabContent({tab, setSwitchCss}){
+
+
+    if(tab === 0 ){
+        return(
+            
+            <div>0번째 내용</div>
+        )
+    } else if (tab === 1) {
+        return(
+            <div>1번째 내용</div>
+        )
+    } else if (tab === 2) {
+        return(
+            <div>2번째 내용</div>
+        )
+    };
+  };
+
+
 export default Detail;
