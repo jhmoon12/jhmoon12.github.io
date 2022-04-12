@@ -13,8 +13,9 @@ const Col = ({shoes}) => {
             </div>
         )
     })  
+
     return (
-        <div>
+        <div className="row">
             {shoesMap}
         </div>
     );

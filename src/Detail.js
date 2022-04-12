@@ -1,19 +1,30 @@
 import React,{ useState,useEffect} from 'react';
 import { useHistory, useParams} from 'react-router-dom';
+import axios from 'axios'
 
 
 
 
-function Detail({shoes}){
+function Detail({shoes, setShoes}){
 
     const [ alert, setAlert ] = useState(true);//ui 스위치
 
     useEffect(()=>{
+
+        axios.get('http://codingapple1.github.io/shop/data2.json')
+                .then(()=>{ 
+                    console.log('성공')
+                    
+                })
+                .catch(()=>{ 
+                    console.log('실패')
+                })
+
         let timer = setTimeout(()=>{
             setAlert(false)
          }, 2000);
          return ()=>{ clearTimeout(timer) }
-    }, [alert]);//ui가 2초 뒤 사라지게 한다.
+    }, []);//ui가 2초 뒤 사라지게 한다.
 
     
 

@@ -6,6 +6,7 @@ import Data from './data'
 import Col from './Col'
 import Detail from './Detail'
 import { Link, Route, Switch } from 'react-router-dom'
+import axios from 'axios';
 
 
 
@@ -34,13 +35,21 @@ function App() {
                 <a className="btn btn-primary btn-lg" href="#" role="button">Learn more</a>	
           </div>
           <div className="container">
-            <div className="row">
               <Col shoes={shoes}/>
-            </div>
+              <button className="btn btn-primary" onClick={()=>{
+                axios.get('http://codingapple1.github.io/shop/data2.json')
+                .then((result)=>{ 
+                    console.log('성공')
+                    setShoes([...shoes, ...result.data])    
+                })
+                .catch(()=>{ 
+                    console.log('실패')
+                })
+            }}>더보기</button>
           </div>  
       </Route>
       <Route path="/detail/:id">
-        <Detail shoes={shoes}/>
+        <Detail shoes={shoes} setShoes={setShoes}/>
       </Route>
     </div>
   );
