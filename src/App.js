@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Data from './data'
 import Col from './Col'
 import Detail from './Detail'
+import Cart from './Cart'
 import { Link, Route, Switch } from 'react-router-dom'
 import axios from 'axios';
 
@@ -47,6 +48,11 @@ function App() {
             }}>더보기</button>
           </div>  
       </Route>
+
+      <Route path="/cart">
+        <Cart />
+      </Route>
+
       <Route path="/detail/:id">
         <Detail shoes={shoes} setShoes={setShoes}/>
       </Route>

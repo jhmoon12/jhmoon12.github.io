@@ -2,11 +2,12 @@ import React,{ useState,useEffect} from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useHistory, useParams} from 'react-router-dom';
 import axios from 'axios'
+import { connect } from 'react-redux';
 
 
 
 
-function Detail({shoes, setShoes}){
+function Detail({shoes, setShoes, state, dispatch}){
 
     const [ alert, setAlert ] = useState(true);//ui 스위치
     let [tab, setTab] = useState(0);
@@ -55,7 +56,10 @@ function Detail({shoes, setShoes}){
           <h4 className="pt-5">{findId.title}</h4>
           <p>{findId.content}</p>
           <p>{findId.price}</p>
-          <button className="btn btn-danger">주문하기</button> 
+          <button className="btn btn-danger" onClick={()=>{
+              dispatch({ type: '상품추가' , payload: { id: 3 , name: findId.title, quan: 5}})
+              history.push('/cart')
+          }}>주문하기</button> 
           <button className="btn back-button" onClick={()=>{history.goBack();}}>뒤로가기</button> 
         </div>
       </div>
@@ -81,7 +85,7 @@ function Detail({shoes, setShoes}){
     )
   }
 
-  function TabContent({tab, setSwitchCss}){
+  function TabContent({tab}){
 
 
     if(tab === 0 ){
@@ -100,5 +104,12 @@ function Detail({shoes, setShoes}){
     };
   };
 
+  function stateProps(state){
+    return {
+        state : state.reducer,
+        alarm : state.reducer2
+    }
+  };
 
-export default Detail;
+
+export default connect(stateProps)(Detail);
