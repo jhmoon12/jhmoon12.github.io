@@ -1,19 +1,20 @@
 import React,{useContext, useState} from 'react';
-import { Link } from 'react-router-dom'
+import { Link , useHistory} from 'react-router-dom'
 import Data from './data'
 
 
 const Col = ({shoes}) => {
 
+    let history = useHistory();
+
     const shoesMap = shoes.map((item,i)=>{
         return (
-            <div className="col-md-4" key={item.id}>
-                <Link to={"/detail/"+ (i+1) }>
-                <img src={ 'https://codingapple1.github.io/shop/shoes'+ (i+1) +'.jpg' } width="100%"/>
+            <div className="col-md-4" key={item.id} onClick={()=>{
+                history.push('/detail/' + item.id )
+            }}>
+                <img src={ 'https://codingapple1.github.io/shop/shoes'+ item.id +'.jpg' } width="100%"/>
                 <h4>{item.title}</h4>
                 <p>{item.content} / {item.price}</p>
-                </Link>
-                
             </div>
         )
     })  

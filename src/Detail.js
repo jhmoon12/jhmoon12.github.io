@@ -57,8 +57,9 @@ function Detail({shoes, setShoes, state, dispatch}){
           <p>{findId.content}</p>
           <p>{findId.price}</p>
           <button className="btn btn-danger" onClick={()=>{
-              dispatch({ type: '상품추가' , payload: { id: 3 , name: findId.title, quan: 5}})
+              dispatch({ type: '상품추가' , payload: { id: findId.id , title: findId.title, quan: 1}})
               history.push('/cart')
+              
           }}>주문하기</button> 
           <button className="btn back-button" onClick={()=>{history.goBack();}}>뒤로가기</button> 
         </div>

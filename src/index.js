@@ -9,15 +9,15 @@ import { createStore, combineReducers } from 'redux';
 
 let 초기값 = [
   { id : 0 ,
-    name : "짱멋진신발", 
+    title : "shoes1", 
     quan : 2 
   },
   { id : 1 ,
-    name : "왕멋진신발", 
+    title : "shoes2", 
     quan : 5 
   },
   { id : 2 ,
-    name : "진짜로멋진신발", 
+    title : "shoes3", 
     quan : 7 
   },
 ]
@@ -36,24 +36,27 @@ function reducer2(state = alarm, action){
 
 function reducer(state = 초기값, action){
 
-
-  if( action.type === '수량증가'){
-    
+  
+  if( action.type === '상품추가' ){
+    let found = state.findIndex((data)=>{ return data.id === action.payload.id })
+    if( found>= 0 ){
+      let copy = [...state];
+      copy[found].quan++;
+      return copy;
+    }else{
+      let copy = [...state];
+      copy.push(action.payload);
+      return copy;
+    }
+  }else if( action.type === '수량증가'){
     let copy = [...state];
-    copy[0].quan++;
+    copy[action.payload].quan++;
     return copy;  
-
-  }else if( action.type === '상품추가' ){
-    let copy = [...state];
-    copy.push(action.payload);
-    return copy;
-  }
-  else if ( action.type === '수량감소' ) {
-    let copy = [...state];
-    copy[0].quan--;
-    return copy;
-  }
-  else{
+  }else if ( action.type === '수량감소' ) { 
+      let copy = [...state];
+      copy[action.payload].quan--;
+      return copy;
+  }else{
     return state
   }
   

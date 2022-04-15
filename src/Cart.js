@@ -1,8 +1,15 @@
 import React from 'react';
 import { Table } from 'react-bootstrap'
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 function Cart(props) {
+
+    let state = useSelector((state)=>state);
+        console.log(state.reducer) 
+    let dispatch = useDispatch();
+
+
     return (
         <div>
             <Table striped bordered hover variant="dark">
@@ -16,25 +23,28 @@ function Cart(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.state.map((item, i)=>(
+                    {state.reducer.map((item)=>(
                         <tr>
                         <td>{item.id}</td>
-                        <td>{item.name}</td>
+                        <td>{item.title}</td>
                         <td>{item.quan}</td>
                         <td>
-                            <button onClick={()=>{ props.dispatch( {type : '수량증가'}) }}>+</button>
-                            <button onClick={()=>{ props.dispatch( {type : '수량감소'}) }}>-</button>
+                            <button onClick={()=>{ dispatch( {type : '수량증가', payload: item.id }) }}>+</button>
+                            <button onClick={()=>{
+                                if(item.quan > 1 ){
+                                    dispatch( {type : '수량감소', payload: item.id })
+                                }}}>-</button>
                             </td>
                         </tr>
                     ))}   
                 </tbody>
             </Table>
                 {
-                    props.alarm ? 
+                    state.reducer2.alarm ? 
                     <div className="myalarm2">
                         <p>지금 구매하면 20% 세일</p>
                         <button className="btn" onClick={()=>{
-                            props.dispatch({
+                            dispatch({
                                 type: '알림닫기'
                             })
                         }}>닫기</button>
@@ -46,12 +56,12 @@ function Cart(props) {
     );
 };
 
-function state를props화함수 (state) {
+/* function state를props화함수 (state) {
     return {
         state : state.reducer,
         alarm : state.reducer2
     }
 }
+export default connect(state를props화함수)(Cart); *///예전 문법 
 
-
-export default connect(state를props화함수)(Cart);
+export default Cart;
