@@ -12,6 +12,7 @@ function Detail({shoes, setShoes, state, dispatch}){
     const [ alert, setAlert ] = useState(true);//ui 스위치
     let [tab, setTab] = useState(0);
     let [ switchCss , setSwitchCss ] = useState(false);
+    
 
     useEffect(()=>{
 
@@ -37,6 +38,10 @@ function Detail({shoes, setShoes, state, dispatch}){
     let findId = shoes.find((shoe)=>{
         return shoe.id == id
     });//path 와 신발 id 값이 같을 때(실제론 ajax가 들어감)
+    const order = () => {
+        dispatch({ type: '상품추가' , payload: { id: findId.id , title: findId.title, quan: 1}})
+        history.push('/cart')
+    };/* 주문하기 함수 */
 
     return(
       <div className="container">
@@ -56,11 +61,7 @@ function Detail({shoes, setShoes, state, dispatch}){
           <h4 className="pt-5">{findId.title}</h4>
           <p>{findId.content}</p>
           <p>{findId.price}</p>
-          <button className="btn btn-danger" onClick={()=>{
-              dispatch({ type: '상품추가' , payload: { id: findId.id , title: findId.title, quan: 1}})
-              history.push('/cart')
-              
-          }}>주문하기</button> 
+          <button className="btn btn-danger" onClick={order}>주문하기</button> 
           <button className="btn back-button" onClick={()=>{history.goBack();}}>뒤로가기</button> 
         </div>
       </div>

@@ -1,13 +1,17 @@
 
 import './App.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import Data from './data'
 import Col from './Col'
-import Detail from './Detail'
+
+
+
 import Cart from './Cart'
 import { Link, Route, Switch } from 'react-router-dom'
 import axios from 'axios';
+
+let Detail = lazy(()=>{ return import ('./Detail.js') });
 
 
 function App() {
@@ -54,7 +58,9 @@ function App() {
       </Route>
 
       <Route path="/detail/:id">
-        <Detail shoes={shoes} setShoes={setShoes}/>
+        <Suspense fallback={<div>로딩중이예요</div>}>
+          <Detail shoes={shoes} setShoes={setShoes}/>
+        </Suspense>
       </Route>
     </div>
   );
