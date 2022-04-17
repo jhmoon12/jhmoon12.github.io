@@ -42,6 +42,9 @@ function Detail({shoes, setShoes, state, dispatch}){
         dispatch({ type: '상품추가' , payload: { id: findId.id , title: findId.title, quan: 1}})
         history.push('/cart')
     };/* 주문하기 함수 */
+    
+
+
 
     return(
       <div className="container">
