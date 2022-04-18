@@ -16,16 +16,10 @@ let Detail = lazy(()=>{ return import ('./Detail.js') });
 
 function App() {
 
+  
   let [shoes, setShoes] = useState(Data);
-  let [recentItem, setRecentItem] = useState([]);
 
-    const saveItem = (id) => {
-        let copyItem = [...new Set(recentItem)];
-          copyItem.push(id);
-          setRecentItem(copyItem);
-    }/* 상품 클릭 시 저장되는 함수 */
-
-      localStorage.setItem(recentItem, JSON.stringify({recentItem})) 
+      
     
     
 
@@ -50,7 +44,7 @@ function App() {
                 <a className="btn btn-primary btn-lg" href="#" role="button">Learn more</a>	
           </div>
           <div className="container">
-              <Col shoes={shoes} saveItem={saveItem}/>
+              <Col shoes={shoes}/>
               <button className="btn btn-primary" onClick={()=>{
                 axios.get('http://codingapple1.github.io/shop/data2.json')
                 .then((result)=>{ 

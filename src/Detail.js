@@ -9,10 +9,36 @@ import { connect } from 'react-redux';
 
 function Detail({shoes, setShoes, state, dispatch}){
 
+
+
     const [ alert, setAlert ] = useState(true);//ui 스위치
     let [tab, setTab] = useState(0);
     let [ switchCss , setSwitchCss ] = useState(false);
+    let history = useHistory();//history 오브젝트 생성
+    let { id } = useParams(); //id 뒤 값 path 로 설정
+    let findId = shoes.find((shoe)=>{
+        return shoe.id == id
+    });//path 와 신발 id 값이 같을 때(실제론 ajax가 들어감)
+
+    const order = () => {
+        dispatch({ type: '상품추가' , payload: { id: findId.id , title: findId.title, quan: 1}})
+        history.push('/cart')
+    };/* 주문하기 함수 */
     
+    
+    useEffect(()=>{
+        let recentItem = localStorage.getItem('watched');
+        recentItem = JSON.parse(recentItem);
+        if( recentItem == null ){
+            recentItem = [];
+        }else {
+            recentItem.push(id);
+        }
+        recentItem = new Set(recentItem);
+        recentItem = [...recentItem];
+        localStorage.setItem('watched', JSON.stringify(recentItem));
+    }, []);
+    /* 최근 본 상품 로컬스토리지 저장 */
 
     useEffect(()=>{
 
@@ -30,20 +56,6 @@ function Detail({shoes, setShoes, state, dispatch}){
          }, 2000);
          return ()=>{ clearTimeout(timer) }
     }, []);//ui가 2초 뒤 사라지게 한다.
-
-    
-
-    let history = useHistory();//history 오브젝트 생성
-    let { id } = useParams(); //id 뒤 값 path 로 설정
-    let findId = shoes.find((shoe)=>{
-        return shoe.id == id
-    });//path 와 신발 id 값이 같을 때(실제론 ajax가 들어감)
-    const order = () => {
-        dispatch({ type: '상품추가' , payload: { id: findId.id , title: findId.title, quan: 1}})
-        history.push('/cart')
-    };/* 주문하기 함수 */
-    
-
 
 
     return(

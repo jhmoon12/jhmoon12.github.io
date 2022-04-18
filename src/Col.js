@@ -2,7 +2,7 @@ import React,{useContext, useState} from 'react';
 import { Link , useHistory} from 'react-router-dom'
 
 
-const Col = ({shoes, saveItem}) => {
+const Col = ({shoes}) => {
 
     let history = useHistory();
     
@@ -11,7 +11,6 @@ const Col = ({shoes, saveItem}) => {
         return (
             <div className="col-md-4" key={item.id} onClick={()=>{
                 history.push('/detail/' + item.id )
-                saveItem(item.id);
                 
             }}>
                 <img src={ 'https://codingapple1.github.io/shop/shoes'+ item.id +'.jpg' } width="100%"/>
