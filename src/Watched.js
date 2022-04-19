@@ -12,19 +12,19 @@ function Watched({shoes}){
     
         let get = localStorage.getItem('watched');
         get = JSON.parse(get);
-        let arr = [get];
-        console.log(arr);
+        get = [...get];
+        console.log(get);
     
     
 
     return (
         <div>
-            {arr.map((item,i)=>{
+            {get.map((item,i)=>{
                 return(
-                <div>
-                <img src={"https://codingapple1.github.io/shop/shoes" + shoes[i].id + ".jpg"} width="20%" />
-                <h4 className="pt-5">{shoes[i].title}</h4>
-                <p>{shoes[i].content}</p>
+                <div key={item}>
+                <img src={"https://codingapple1.github.io/shop/shoes" + shoes[1].id + ".jpg"} width="20%" />
+                <h4>{shoes[1].title}</h4>
+                <p>{item}</p>
                 </div>
                 )
                 
