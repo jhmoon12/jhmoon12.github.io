@@ -4,6 +4,7 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useState, lazy, Suspense } from 'react';
 import Data from './data'
 import Col from './Col'
+import Watched from './Watched';
 
 
 
@@ -16,12 +17,7 @@ let Detail = lazy(()=>{ return import ('./Detail.js') });
 
 function App() {
 
-  
   let [shoes, setShoes] = useState(Data);
-
-      
-    
-    
 
   return (
     <div className="App">
@@ -55,7 +51,12 @@ function App() {
                     console.log('실패')
                 })
             }}>더보기</button>
+          
           </div>  
+      </Route>
+
+      <Route path="/watched">
+        <Watched shoes={shoes}/>
       </Route>
 
       <Route path="/cart">

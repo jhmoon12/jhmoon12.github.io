@@ -32,8 +32,8 @@ function Detail({shoes, setShoes, state, dispatch}){
         if( recentItem == null ){
             recentItem = [];
         }else {
-            recentItem.push(id);
-        }
+            recentItem.unshift(id);
+        }//null 일시, 배열로 만들어 주고, push 작업을 해준다.
         recentItem = new Set(recentItem);
         recentItem = [...recentItem];
         localStorage.setItem('watched', JSON.stringify(recentItem));
